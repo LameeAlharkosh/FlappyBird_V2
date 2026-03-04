@@ -6,7 +6,6 @@ namespace FlappyBird_V2
 {
     public partial class Form1 : Form
     {
-        // إعدادات اللعبة المتوازنة
         int pipeSpeed = 8;
         int gravity = 5;
         int score = 0;
@@ -16,9 +15,8 @@ namespace FlappyBird_V2
         public Form1()
         {
             InitializeComponent();
-            this.KeyPreview = true; // تفعيل الكيبورد لزر R
+            this.KeyPreview = true; 
 
-            // حل مشكلة المربعات البيضاء آلياً
             bird.BackColor = Color.Transparent;
             pipeTop.BackColor = Color.Transparent;
             pipeBottom.BackColor = Color.Transparent;
@@ -32,14 +30,12 @@ namespace FlappyBird_V2
             pipeTop.Left -= pipeSpeed;
             scoreText.Text = "Score: " + score;
 
-            // حل مشكلة التأخر: التوليد يبدأ بمجرد خروج الأنبوب بمسافة 75 بكسل
             if (pipeBottom.Left < -75)
             {
                 score++;
                 GeneratePipes();
             }
 
-            // فحص الاصطدام
             if (bird.Bounds.IntersectsWith(pipeBottom.Bounds) ||
                 bird.Bounds.IntersectsWith(pipeTop.Bounds) ||
                 bird.Bounds.IntersectsWith(ground.Bounds) || bird.Top < -25)
@@ -51,7 +47,6 @@ namespace FlappyBird_V2
         private void GeneratePipes()
         {
             int randomY = rnd.Next(-150, 50);
-            // الإبعاد لـ 950 لكي يتغير الارتفاع "خلف الكواليس" ولا يراه اللاعب
             pipeTop.Left = 950;
             pipeTop.Top = randomY;
 
@@ -61,7 +56,7 @@ namespace FlappyBird_V2
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            if (!isGameOver) gravity = -14; // قفزة هادئة (ليست سريعة جداً)
+            if (!isGameOver) gravity = -14; 
         }
 
         private void Form1_MouseUp(object sender, MouseEventArgs e)
@@ -91,7 +86,6 @@ namespace FlappyBird_V2
             gravity = 5;
             bird.Top = 150;
 
-            // العودة لوضعية بداية مرتبة
             pipeTop.Top = -100;
             pipeBottom.Top = 280;
             pipeTop.Left = 850;
@@ -101,7 +95,6 @@ namespace FlappyBird_V2
             timer1.Start();
         }
 
-        // دوال فارغة لمنع أخطاء التصميم
         private void pipeTop_Click(object sender, EventArgs e) { }
         private void Form1_Load(object sender, EventArgs e) { }
         private void Form1_Load_1(object sender, EventArgs e) { }
